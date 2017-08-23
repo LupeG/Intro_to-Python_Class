@@ -1,0 +1,296 @@
+
+# coding: utf-8
+
+# In[151]:
+
+import numpy as np
+from matplotlib import pyplot as plt
+get_ipython().magic(u'matplotlib inline')
+
+
+# In[152]:
+
+class RW(object):
+    """This is an implementation of a random walker 1D """
+
+
+# In[153]:
+
+rw = RW()
+rw.x0 = 5
+
+
+# In[154]:
+
+rw.x0
+
+
+# In[155]:
+
+def rw_move(rw):
+    if np.random.random() < 0.5:
+        rw.x  = rw.x0 - 1
+    else:
+        rw.x  = rw.x0 + 1
+    return rw.x
+
+
+# In[156]:
+
+rw_move(rw)
+
+
+# In[157]:
+
+def rw_move(rw):
+    if np.random.random() < 0.5:
+        rw.x  = rw.x - 1
+    else:
+        rw.x  = rw.x + 1
+    return rw.x
+
+
+# In[158]:
+
+rw_move(rw)
+
+
+# In[159]:
+
+rw2 = RW()
+rw2.x0 = 5
+rw2.x0
+
+
+# In[160]:
+
+rw2 = RW()
+rw2.x = 5
+positions = [rw2.x]
+for i in xrange(10):
+    rw_move(rw2)
+    positions.append(rw2.x)
+    print positions[-1]
+
+
+# In[161]:
+
+positions
+
+
+# In[162]:
+
+plt.plot(positions)
+
+
+# In[163]:
+
+class RW(object):
+    """ This is an implementation of a random walker in 1D
+    """
+    def __init__(self, x, num_times):
+        self.x = x
+        self.num_times = num_times
+        self.positions = []
+        
+    def rw_move(self):
+        if np.random.random() < 0.5:
+            self.x  = self.x - 1
+        else:
+            self.x  = self.x + 1
+        return self.x
+    def rw_run(self):
+        for i in xrange(self.num_times):
+            self.rw_move()
+            self.positions.append(self.x)
+
+
+# In[164]:
+
+rw3 = RW(0, 10)
+
+
+# In[165]:
+
+rw3.x
+
+
+# In[166]:
+
+rw3.rw_move()
+
+
+# In[167]:
+
+rw3.x
+
+
+# In[168]:
+
+rw3.rw_run()
+
+
+# In[169]:
+
+rw3.x
+
+
+# In[170]:
+
+rw3.positions
+
+
+# In[171]:
+
+plt.plot(rw3.positions)
+
+
+# In[172]:
+
+rw4 = RW(0, 10000)
+rw4.rw_run()
+plt.plot(rw4.positions)
+
+
+# In[173]:
+
+class RW(object):
+    """ This is an implementation of a random walker in 2D
+    """
+    
+    def __init__(self, x, y, num_times):
+        self.x = x
+        self.y = y
+        self.num_times = num_times
+        self.xpositions = [self.x]
+        self.ypositions = [self.y]
+        
+    def rw_move_x(self):
+        if np.random.random() < 0.5:
+            self.x  = self.x - 1
+        else:
+            self.x  = self.x + 1
+        return self.x
+    
+    def rw_move_y(self):
+        if np.random.random() < 0.5:
+            self.y  = self.y - 1
+        else:
+            self.y = self.y + 1
+        return self.y
+    
+        
+    def rw_move(self):
+        if np.random.random() < 0.5:
+            rw_move_x(self)
+        else:
+            rw_move_y(self)
+        return (self.x, self.y)
+    
+    
+    def rw_run(self):
+        for i in xrange(self.num_times):
+            self.rw_move()
+            self.xpositions.append(self.x)
+            self.ypositions.append(self.y)
+
+
+# In[175]:
+
+def rw_move_x(self):
+        if np.random.random() < 0.5:
+            self.x  = self.x - 1
+        else:
+            self.x  = self.x + 1
+        return self.x
+    
+def rw_move_y(self):
+        if np.random.random() < 0.5:
+            self.y  = self.y - 1
+        else:
+            self.y = self.y + 1
+        return self.y
+    
+        
+def rw_move(self):
+        if np.random.random() < 0.5:
+            rw_move_x(self)
+        else:
+            rw_move_y(self)
+        return (self.x, self.y)
+    
+    
+def rw_run(self):
+        for i in xrange(self.num_times):
+            self.rw_move()
+            self.xpositions.append(self.x)
+            self.ypositions.append(self.y)
+
+
+# In[176]:
+
+rw4 = RW(0, 0, 69)
+
+
+# In[177]:
+
+rw4.x
+
+
+# In[178]:
+
+rw4.y
+
+
+# In[179]:
+
+rw4.rw_move_x()
+
+
+# In[180]:
+
+rw4.rw_move_y()
+
+
+# In[181]:
+
+rw4.rw_move()
+
+
+# In[182]:
+
+rw4.rw_run()
+
+
+# In[183]:
+
+plt.plot(rw4.xpositions, rw4.ypositions, '-o')
+
+
+# Calculating the distance between two points:
+# 
+# Distance = sqrt[(x2-x1)^2+(y2-y1)^2]
+
+# In[184]:
+
+def get_distance((x1, y1), (x2, y2)):
+    ix = x2 - x1
+    ixx = ix * ix
+    iy = y2 - y1
+    iyy = iy * iy
+    xy = ixx + iyy
+    return np.sqrt(xy)
+    
+
+
+# In[185]:
+
+get_distance((1,1),(0,0))
+
+
+# the diagonal of a square with sides one is equal to the square root of 2(not 1). 
+
+# In[ ]:
+
+
+
